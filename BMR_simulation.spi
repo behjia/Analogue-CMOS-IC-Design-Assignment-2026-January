@@ -1,0 +1,39 @@
+*** SPICE deck for cell BMR_simulation{sch} from library BMR-OTA-VREF
+*** Created on Thu Dec 17, 2009 06:33:43
+*** Last revised on Thu Apr 16, 2026 17:39:50
+*** Written on Fri Apr 24, 2026 21:32:03 by Electric VLSI Design System, version 9.07
+*** Layout tech: mocmos, foundry MOSIS
+*** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
+
+*** SUBCIRCUIT BMR-OTA-VREF__BMR FROM CELL BMR{sch}
+.SUBCKT BMR-OTA-VREF__BMR vbiasn
+** GLOBAL gnd
+** GLOBAL vdd
+Mnmos@0 Vbiasp vbiasn net@72 gnd NMOS L=3U W=9U M=4
+Mnmos@1 vbiasn vbiasn gnd gnd NMOS L=3U W=9U
+Mnmos@2 Vsu Vsu net@57 gnd NMOS L=6U W=1.8U
+Mnmos@3 net@57 net@57 gnd gnd NMOS L=6U W=1.8U
+Mnmos@18 net@588 Vbiasp net@524 gnd NMOS L=0.6U W=3.6U
+Mnmos@19 net@52 vbiasn net@524 gnd NMOS L=0.6U W=3.6U
+Mnmos@20 net@524 vbiasn gnd gnd NMOS L=0.6U W=3.6U
+Mnmos@21 gnd vbiasn net@524 gnd NMOS L=0.6U W=3.6U
+Rp2res@0 net@72 gnd 16.15k
+Mpmos@0 vdd net@52 Vbiasp vdd PMOS L=3U W=18U
+Mpmos@1 vdd net@52 vbiasn vdd PMOS L=3U W=18U
+Mpmos@2 vdd net@52 Vsu vdd PMOS L=3U W=18U
+Mpmos@4 net@52 Vsu vbiasn vdd PMOS L=0.6U W=1.8U
+Mpmos@17 vdd net@588 net@588 vdd PMOS L=0.6U W=3.6U
+Mpmos@18 vdd net@588 net@52 vdd PMOS L=0.6U W=3.6U
+.ENDS BMR-OTA-VREF__BMR
+
+.global gnd vdd
+
+*** TOP LEVEL CELL: BMR_simulation{sch}
+Mnmos@0 vdd Vbiasn gnd gnd NMOS L=3U W=9U
+XBMR@0 Vbiasn BMR-OTA-VREF__BMR
+
+* Spice Code nodes in cell cell 'BMR_simulation{sch}'
+VDD VDD 0 DC 5
+.dc VDD 1.2 1.8 1m
+.include C:\Electric\C5_models.txt
+.END
